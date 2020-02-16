@@ -3,6 +3,9 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 import csv
 import openpyxl
+import ast
+
+
 
 from collections import OrderedDict 
 od = OrderedDict()
@@ -26,10 +29,15 @@ def index(request):
         """
         for dct in map(dict, reader):
             list1.append(dct.get('id')) 
+        
 
-            
         
-        
+        my_int_list = [int(i) for i in list1]
+
+        l = tuple(my_int_list) 
+        print(l)  
+         
+               
       #  print([dict(d) for d in reader if d == "id"])
         
         
@@ -52,7 +60,7 @@ def index(request):
         url1 = fs.url(name)
         context['url1'] = url1
         print(url1)
-        print(list1)
+        # print(list1)
         return render(request, 'index.html', context)
 
     else:
